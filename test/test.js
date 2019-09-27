@@ -19,13 +19,13 @@ describe('test should test root route to app', () => {
 
 describe('GET /path', () => {
   it('should throw an error due to invalid endpoint', (done) => {
-    supertest('app')
+    supertest('http://localhost:7002')
       .get('/random')
-      .expect('Content-Type', /json/)
+      .expect('Content-Type', /html/)
       .expect(404, done)
-    // .end(function (err, res) {
-    //   if (err) return done(err);
-    //   done();
-    // })
+      .end((err, res) => {
+        expect(res.status).equal(404);
+        done();
+      })
   })
 });
